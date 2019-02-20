@@ -17,7 +17,6 @@ function ratingRange (c: AbstractControl):{ [key: string]: boolean } | null {
 })
 export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
-  // customer = new Customer();
 
   constructor(private fb: FormBuilder) { }
 
