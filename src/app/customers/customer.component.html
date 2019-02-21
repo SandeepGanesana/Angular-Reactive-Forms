@@ -76,10 +76,11 @@
                    placeholder="Confirm Email (required)"
                    formControlName="confirmEmail"
                    [ngClass]="{'is-invalid': emailConfirmationMessage }" />
+            <!-- Email Match If Condition not working -->
             <span class="invalid-feedback">
-              <span *ngIf="customerForm.get('emailGroup').errors">
+              <span *ngIf="customerForm.get('emailGroup').errors?.match"> 
                 DOESNOT MATCH.
-              </span>
+              </span> 
               <span *ngIf="emailConfirmationMessage">
                {{ emailConfirmationMessage }}
               </span>
