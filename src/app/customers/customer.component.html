@@ -50,26 +50,45 @@
         </div>
       </div>
 
-      <div class="form-group row mb-2">
-        <label class="col-md-2 col-form-label"
-               for="emailId">Email</label>
-        <div class="col-md-8">
-          <input class="form-control"
-                 id="emailId"
-                 type="email"
-                 placeholder="Email (required)"
-                 formControlName="email"
-                 [ngClass]="{'is-invalid': (customerForm.get('email').touched || customerForm.get('email').dirty) && !customerForm.get('email').valid }" />
-          <span class="invalid-feedback">
-            <span *ngIf="customerForm.get('email').errors?.required">
-              Please enter your email address.
+      <div formGroupName="emailGroup">
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="emailId">Email</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="emailId"
+                   type="email"
+                   placeholder="Email (required)"
+                   formControlName="email"
+                   [ngClass]="{'is-invalid': emailMessage }" />
+            <span class="invalid-feedback" *ngIf="emailMessage">
+                {{ emailMessage }}
             </span>
-            <span *ngIf="customerForm.get('email').errors?.email">
-              Please enter a valid email address.
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="emailId2">Confirm Email</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="emailId2"
+                   type="email"
+                   placeholder="Confirm Email (required)"
+                   formControlName="confirmEmail"
+                   [ngClass]="{'is-invalid': emailConfirmationMessage }" />
+            <span class="invalid-feedback">
+              <span *ngIf="customerForm.get('emailGroup').errors">
+                DOESNOT MATCH.
+              </span>
+              <span *ngIf="emailConfirmationMessage">
+               {{ emailConfirmationMessage }}
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       </div>
+
+
 
       <div class="form-group row mb-2" *ngIf="customerForm.get('sendCatalog').value && customerForm.get('notification').value === 'mobile'">
         <label for="phoneNumber" class="col-md-2 col-form-label">Phone Number</label>
@@ -94,11 +113,11 @@
           <div class="form-check form-check-inline">
               <label for="email" class="form-check-label"><input type="radio" class="form-check-input"
                  id="email" name="notification" value="email"
-                  formControlName="notification" (click)="notify('email')">Email</label>
+                  formControlName="notification">Email</label>
           </div>
           <div class="form-check form-check-inline">
               <label for="mobile" class="form-check-label"><input type="radio" class="form-check-input" id="mobile"
-                 name="notification" value="mobile"  (click)="notify('mobile')"
+                 name="notification" value="mobile" 
                  formControlName="notification">Mobile</label>
             </div>
         </div>
