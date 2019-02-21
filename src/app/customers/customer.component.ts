@@ -15,7 +15,6 @@ function ratingRange (min: number, max: number): ValidatorFn {
 function emailMatch(c: AbstractControl):{ [key: string]: boolean } | null {
     const first = c.get('email');
     const second = c.get('confirmEmail');
-    console.log("I'm from  emailMatch Validators", c)
     if(first.pristine || second.pristine){
       return null;
     }
@@ -98,7 +97,6 @@ export class CustomerComponent implements OnInit {
   setMessage(c: AbstractControl, type: string):void {
     this.emailMessage = '';
     this.emailConfirmationMessage = '';
-    console.log(this.customerForm.get('emailGroup').errors)
     if ((c.touched || c.dirty) && c.errors && type == 'email') {
       this.emailMessage = Object.keys(c.errors).map(
       key => {

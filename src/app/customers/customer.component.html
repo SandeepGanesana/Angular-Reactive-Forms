@@ -17,7 +17,8 @@
                  type="text"
                  placeholder="First Name (required)"
                  formControlName="firstName"
-                 [ngClass]="{'is-invalid': (customerForm.get('firstName').touched || customerForm.get('firstName').dirty) && !customerForm.get('firstName').valid }" />
+                 [ngClass]="{'is-invalid': (customerForm.get('firstName').touched ||
+                  customerForm.get('firstName').dirty) && !customerForm.get('firstName').valid }" />
           <span class="invalid-feedback">
             <span *ngIf="customerForm.get('firstName').errors?.required">
               Please enter your first name.

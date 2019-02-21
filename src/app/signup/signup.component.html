@@ -1,0 +1,99 @@
+<div class="card">
+  <div class="card-header">
+    Request Form
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="save()" [formGroup]="requestForm">
+      <div class="form-group row">
+        <label for="firstName" class="col-form-label col-md-2">First Name</label>
+        <div class="col-md-8">
+          <input type="text" id="firstName" class="form-control" 
+          placeholder="First Name" formControlName="first_name"
+         >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="lastName" class="col-form-label col-md-2">Last Name</label>
+        <div class="col-md-8">
+          <input type="text" id="lastName" class="form-control" placeholder="Second Name" formControlName="last_name">
+        </div>
+      </div>
+      <div class="match-email" formGroupName="emailGroup">
+        <div class="form-group row">
+          <label for="email" class="col-form-label col-md-2">Email</label>
+          <div class="col-md-8">
+            <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-form-label col-md-2">Confirm Email</label>
+          <div class="col-md-8">
+            <input type="text" id="email" class="form-control" placeholder="Confirm Email" formControlName="confirmEmail">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-8 pl-15">
+          <label for="sendmecatalog">Send me Catalog <input type="checkbox"
+            id="sendmecatalog" formControlName="sendCatalog"></label>
+        </div>
+      </div>
+      <div class="sendCatlog" *ngIf="requestForm.get('sendCatalog').value" formGroupName="addressGroup">
+        <div class="form-group row">
+          <div class="col-md-2">
+            <label for="addressType" class="col-form-label">Select Address Type</label>
+          </div>
+          <div class="col-md-8">
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="addressType" value="home" id="home" formControlName="addressType">
+              <label for="form-check-label" for="home" >Home</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="addressType" id="work" value="work" formControlName="addressType">
+              <label for="form-check-label" for="work">Work</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="addressType" id="other" value="other" formControlName="addressType">
+              <label for="form-check-label" for="other">Other</label>
+            </div>
+        </div>
+        </div>
+      <div class="form-group row">
+          <label for="streetAddress1" class="col-form-label col-md-2">Street Address 1</label>
+          <div class="col-md-8">
+            <input type="text" id="email" class="form-control" placeholder="streetAddress"formControlName="street1">
+          </div>
+      </div>
+      
+      <div class="form-group row">
+          <label for="text" class="col-form-label col-md-2">Street Address 2(optional)</label>
+          <div class="col-md-8">
+            <input type="streetAddress2" id="address2" class="form-control" placeholder="Street Address (Optional)" formControlName="street2">
+          </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-md-2">City, State, Zip</label>
+        <div class="form-row col-md-8">
+          <div class="col-7">
+            <input type="text" class="form-control" placeholder="City" formControlName="city">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="State" formControlName="state">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Zip" formControlName="zipcode">
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="form-group row" >
+        <div class="offset-md-2 col-md-2">
+          <button type="submit" class="btn btn-primary" [disabled]="!requestForm.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>Value: {{ requestForm.value | json }}
+
