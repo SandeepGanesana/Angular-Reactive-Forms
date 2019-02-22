@@ -38,55 +38,70 @@
             id="sendmecatalog" formControlName="sendCatalog"></label>
         </div>
       </div>
-      <div class="sendCatlog" *ngIf="requestForm.get('sendCatalog').value" formGroupName="addressGroup">
+      <div *ngIf="requestForm.get('sendCatalog').value">
+        <div formArrayName="addressGroup" *ngFor="let address of addressGroup.controls; let i = index">
+          <div class="sendCatlog"  [formGroupName]="i">
+            <div class="form-group row">
+              <div class="col-md-2">
+                <label for="addressType" class="col-form-label">Select Address Type</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="addressType" value="home" attr.for="{{ 'home' + i }}" formControlName="addressType">
+                  <label for="form-check-label" attr.for="{{ 'home' + i }}" >Home</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="addressType" attr.id="{{ 'work' + i }}" value="work" formControlName="addressType">
+                  <label for="form-check-label" for="{{ 'work' + i }}">Work</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="addressType" id="{{ 'other' + i }}" value="other" formControlName="addressType">
+                  <label for="form-check-label" attr.for="{{ 'other' + i }}">Other</label>
+                </div>
+            </div>
+            </div>
+            <div class="form-group row">
+                <label attr.for="{{'streetAddress1Id'+ i}}" class="col-form-label col-md-2">Street Address 1</label>
+                <div class="col-md-8">
+                  <input type="text" id="{{'streetAddress1Id'+ i}}" class="form-control" placeholder="streetAddress"formControlName="street1">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label attr.for="{{'streetAddress2Id'+ i}}" class="col-form-label col-md-2">Street Address 2(optional)</label>
+                <div class="col-md-8">
+                  <input type="streetAddress2" id="{{'streetAddress2Id'+ i}}" class="form-control" placeholder="Street Address (Optional)" formControlName="street2">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+              <label attr.for="{{'cityId' + i}}" class="col-form-label col-md-2">City, State, Zip</label>
+              <div class="form-row col-md-8">
+                <div class="col-7">
+                  <input type="text" class="form-control" placeholder="City" formControlName="city" id="{{'cityId'+ i}}">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="State" formControlName="state">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Zip" formControlName="zipcode">
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-2">
+                <button type="button" class="btn btn-outline-primary" (click)="removeAddress(i)">Remove Address</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="form-group row">
           <div class="col-md-2">
-            <label for="addressType" class="col-form-label">Select Address Type</label>
-          </div>
-          <div class="col-md-8">
-            <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" name="addressType" value="home" id="home" formControlName="addressType">
-              <label for="form-check-label" for="home" >Home</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" name="addressType" id="work" value="work" formControlName="addressType">
-              <label for="form-check-label" for="work">Work</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" name="addressType" id="other" value="other" formControlName="addressType">
-              <label for="form-check-label" for="other">Other</label>
-            </div>
-        </div>
-        </div>
-      <div class="form-group row">
-          <label for="streetAddress1" class="col-form-label col-md-2">Street Address 1</label>
-          <div class="col-md-8">
-            <input type="text" id="email" class="form-control" placeholder="streetAddress"formControlName="street1">
-          </div>
-      </div>
-      
-      <div class="form-group row">
-          <label for="text" class="col-form-label col-md-2">Street Address 2(optional)</label>
-          <div class="col-md-8">
-            <input type="streetAddress2" id="address2" class="form-control" placeholder="Street Address (Optional)" formControlName="street2">
-          </div>
-      </div>
-      
-      <div class="form-group row">
-        <label for="email" class="col-form-label col-md-2">City, State, Zip</label>
-        <div class="form-row col-md-8">
-          <div class="col-7">
-            <input type="text" class="form-control" placeholder="City" formControlName="city">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="State" formControlName="state">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Zip" formControlName="zipcode">
+            <button type="button" class="btn btn-outline-primary" (click)="addAddress()" [disabled]="!requestForm.valid">Add Another Address</button>
           </div>
         </div>
       </div>
-      </div>
+
       <div class="form-group row" >
         <div class="offset-md-2 col-md-2">
           <button type="submit" class="btn btn-primary" [disabled]="!requestForm.valid">Submit</button>

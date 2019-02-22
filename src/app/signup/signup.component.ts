@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
 
 function matchEmail(c: AbstractControl):{ [key: string]: boolean } | null {
   const email = c.get('email');
@@ -33,17 +33,33 @@ export class SignupComponent implements OnInit {
         confirmEmail: ['', [Validators.email, Validators.required]]
       }, { Validators: matchEmail }),
       sendCatalog: true,
-      addressGroup: this.fb.group({
-        addressType: ['home', [Validators.required]],
-        street1: [''],
-        street2: [''],
-        city: [''],
-        state: [''],
-        zipcode: ['']
-      })
+      addressGroup: this.fb.array([ this.buildAddress() ])  // Call Refactor Method ==> this.buildAddress()
     })
   }
   save() {
+    console.log(this.requestForm.controls['addressGroup']);
     console.log('submitted');
+  }
+
+  buildAddress(): FormGroup { //Refactor create a method
+    return this.fb.group({
+      addressType: ['home', Validators.required],
+      street1: ['', Validators.required],
+      street2: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipcode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(7)]]
+    })
+  }
+
+  get addressGroup(): FormArray{
+    return <FormArray>this.requestForm.get('addressGroup');
+  }
+
+  addAddress(): void {
+    this.addressGroup.push(this.buildAddress());
+  }
+  removeAddress(id: number) {
+    this.addressGroup.removeAt(id);
   }
 }
