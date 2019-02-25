@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CustomerComponent } from './customers/customer.component';
 import { SignupComponent } from './signup/signup.component';
+import { LetterComponent } from './letter/letter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerComponent,
-    SignupComponent
+    SignupComponent,
+    LetterComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +21,7 @@ import { SignupComponent } from './signup/signup.component';
     RouterModule.forRoot([
       {path: '', component: CustomerComponent},
       {path: 'request', component: SignupComponent, pathMatch: 'full'},
+      {path: 'letter', component: LetterComponent , pathMatch: 'full'},
       {path: '**', redirectTo: '', pathMatch: 'full'}
     ])
   ],

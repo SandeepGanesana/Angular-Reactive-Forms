@@ -1,0 +1,46 @@
+div {
+    background: #333;
+    margin: 0px;
+}
+h1 {
+    position: absolute;
+    top: 12mm;
+    left: 20mm;
+    width: 128px;
+    /* height: 128px; */
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 44px 0;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+
+    background-image: url(../../assets/logo.png);
+    border-radius: 65px;
+    box-shadow: 3px 3px 3px shadow;
+}
+
+address {
+    position: absolute;
+    bottom: 8mm;
+    right: 20mm;
+}
+
+article {
+    width: 200mm;
+    height: 297mm;
+    margin: 20px auto;
+    position: relative;
+}
+
+
+article {
+    background: url(../../assets/top-image.png) no-repeat left top;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.2)),
+                url(../../assets/top-image.png) no-repeat left top,
+                url(../../assets/bottom-image.png) no-repeat left bottom;
+    background-color: white;
+    /* border-top: 1mm solid red;
+    border-bottom: 1mm solid red; */
+}
+  

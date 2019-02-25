@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
 
-function matchEmail(c: AbstractControl):{ [key: string]: boolean } | null {
-  const email = c.get('email');
-  const confEmail = c.get('confirmEmail');
-  if (email.pristine || confEmail.pristine) {
+function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
+  const emailControl = c.get('email');
+  const confirmControl = c.get('confirmEmail');
+
+  if (emailControl.pristine || confirmControl.pristine) {
     return null;
   }
-  if (email.value === confEmail.value) {
+
+  if (emailControl.value === confirmControl.value) {
     return null;
   }
-  return {match: true}
+  return { 'match': true };
 }
 
 @Component({
@@ -31,7 +33,7 @@ export class SignupComponent implements OnInit {
       emailGroup: this.fb.group({
         email: ['', [Validators.email, Validators.required]],
         confirmEmail: ['', [Validators.email, Validators.required]]
-      }, { Validators: matchEmail }),
+      }, { validator: emailMatcher }),
       sendCatalog: true,
       addressGroup: this.fb.array([ this.buildAddress() ])  // Call Refactor Method ==> this.buildAddress()
     })
