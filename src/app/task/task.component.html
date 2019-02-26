@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-header">
+    Online Appointments
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onlineAppointments()" [formGroup]="taskForm">
+        <div class="form-row">
+          <div class="col">
+            <label for="appointmentStatus">AppointmentStatus</label>
+            <input type="text" class="form-control" id="appointmentStatus" placeholder="Appointment Status"
+             formControlName="appointmentStatus">
+          </div>
+          <div class="col">
+            <label for="customerGroupId">Customer Group ID</label>
+            <input type="number" class="form-control" id="customerGroupId" placeholder="Customer Group ID" formControlName="customerGroupId">
+          </div>
+          <div class="col">
+            <label for="dateTime">Date and Time</label>
+            <input type="date" class="form-control" id="dateTime"  placeholder="Date and Time" formControlName="dateTime">
+          </div>
+          <div class="col">
+            <label for="facilityId">facilityID</label>
+            <input type="number" class="form-control" id="facilityId" placeholder="facilityId" formControlName="facilityId">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2 float-right" [disabled]="!taskForm.valid">Submit</button>
+      </form>
+  </div>
+</div>
+<div>
+  {{ taskForm.appointmentStatus | json }}
+<br>
+</div>
+<div class="table-responsive-xl" >
+    <table class="table">
+        <thead *ngIf="tableData.length">
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">appointmentDate</th>
+              <th scope="col">appointmentNumber</th>
+              <th scope="col">appointmentStatus</th>
+              <th scope="col">doctorName</th>
+              <th scope="col">email</th>
+              <th scope="col">metaStatus</th>
+              <th scope="col">patientName</th>
+              <th scope="col">phoneNumber</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="tableData.length > 0">
+            <tr *ngFor="let data of tableData">
+              <th scope="row"> {{ data.id }}</th>
+              <td> {{ data.appointmentDate | date }} </td>
+              <td> {{ data.appointmentNumber }} </td>
+              <td> {{ data.appointmentStatus }} </td>
+              <td>{{ data.doctorName }}</td>
+              <td> {{ data.email }} </td>
+              <td> {{ data.metaStatus }} </td>
+              <td> {{ data.patientName }} </td>
+              <td> {{ data.phoneNumber }} </td>
+            </tr>
+          </tbody>
+          <tbody>
+            no data found
+          </tbody>
+    </table>
+  </div>
