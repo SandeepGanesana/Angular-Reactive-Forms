@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -19,19 +19,46 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
     this.taskForm = this.fb.group({
-      appointmentStatus: [''], 
+      appointmentStatus: this.fb.array([
+      ]), 
       customerGroupId: ['', [Validators.required]],
       dateTime: ['', Validators.required],
       facilityId: ['', Validators.required]
     })
   }
+  get getAppointmentStatus() {
+    return this.taskForm.get('appointmentStatus') as FormArray;
+  }
 
+  addAppointmentStatus(id) {
+    let index = this.getAppointmentStatus.controls.findIndex(control => {
+      console.log(control.value == id, control);
+      return control.value == id;
+    });
+    if (index < 0) {
+      this.addItem(id)
+    } 
+    else {
+      this.removeItem(id)
+    }
+  }
+
+  private addItem(value: number) {  
+    this.getAppointmentStatus.push(new FormControl(value));
+  }
+  private removeItem(value: number) {
+    let index = this.getAppointmentStatus.controls.findIndex(control => {
+      return control.value == value;
+    });
+    this.getAppointmentStatus.removeAt(index);
+  }
+  
   onlineAppointments() {
-    var obj = this.taskForm.controls;
-    this.taskForm.patchValue({
-      appointmentStatus: [`` + obj.appointmentStatus.value + ``]
-    })
-    console.log(this.taskForm.value)
+    // var obj = this.taskForm.controls;
+    // this.taskForm.patchValue({
+    //   appointmentStatus: [`` + obj.appointmentStatus.value + ``]
+    // })
+    // console.log(this.taskForm.value)
     this.searchOnline(this.taskForm.value).subscribe(res => {
         this.tableData = (res)
       } 
