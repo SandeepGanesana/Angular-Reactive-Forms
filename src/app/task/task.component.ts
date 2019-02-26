@@ -12,6 +12,11 @@ export class TaskComponent implements OnInit {
   private url = 'http://103.211.39.48:8073/chemrsvcs/jsonapi/nosur/oas/getAllCHEMROnlineAppointmentsByVO';
   taskForm: FormGroup;
   tableData = [];
+  status= [
+    {name: 'online', id: 1},
+    {name: 'offline', id: 2},
+    {name: 'pending', id: 3}
+  ]
   constructor(
     private fb: FormBuilder,
     private http: HttpClient
@@ -32,7 +37,6 @@ export class TaskComponent implements OnInit {
 
   addAppointmentStatus(id) {
     let index = this.getAppointmentStatus.controls.findIndex(control => {
-      console.log(control.value == id, control);
       return control.value == id;
     });
     if (index < 0) {

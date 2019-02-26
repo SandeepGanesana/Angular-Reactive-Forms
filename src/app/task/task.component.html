@@ -6,16 +6,16 @@
     <form (ngSubmit)="onlineAppointments()" [formGroup]="taskForm">
         <div class="form-row">
           <div class="col">
-              <div>
-                <label for="online">
-                  <input id="online" type="checkbox" (click)="addAppointmentStatus(1)">Online
+              <div *ngFor="let s of status">
+                <label [for]="s.name">
+                  <input id="{{s.name}}" type="checkbox" (click)="addAppointmentStatus(s.id)">{{s.name}}
                 </label>
-                <label for="offline">
-                  <input id="offline" type="checkbox" (click)="addAppointmentStatus(2)">Offline
+                <!-- <label for="offline">
+                  <input id="offline" type="checkbox" (click)="addAppointmentStatus(s.id)">Offline
                 </label>
                 <label for="Pending">
-                  <input id="Pending" type="checkbox" (click)="addAppointmentStatus(3)">Pending
-                </label>
+                  <input id="Pending" type="checkbox" (click)="addAppointmentStatus(s.id)">Pending
+                </label> -->
               </div>
           </div>
           <div class="col">
