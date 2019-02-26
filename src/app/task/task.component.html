@@ -33,7 +33,7 @@
 </div>
 <div class="table-responsive-xl" >
     <table class="table">
-        <thead *ngIf="tableData.length">
+        <thead >
             <tr>
               <th scope="col">id</th>
               <th scope="col">appointmentDate</th>
@@ -46,7 +46,7 @@
               <th scope="col">phoneNumber</th>
             </tr>
           </thead>
-          <tbody *ngIf="tableData.length > 0">
+          <tbody *ngIf="tableData.length > 0; else elseBlock">
             <tr *ngFor="let data of tableData">
               <th scope="row"> {{ data.id }}</th>
               <td> {{ data.appointmentDate | date }} </td>
@@ -59,8 +59,13 @@
               <td> {{ data.phoneNumber }} </td>
             </tr>
           </tbody>
-          <tbody>
-            no data found
-          </tbody>
+          
+          <ng-template #elseBlock>
+            <tbody>
+              <tr>
+                <td colspan="9" class="text-center">no data found</td>
+              </tr>
+            </tbody>
+          </ng-template>
     </table>
   </div>
