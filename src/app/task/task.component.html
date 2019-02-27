@@ -23,8 +23,9 @@
             <input type="number" class="form-control" id="customerGroupId" placeholder="Customer Group ID" formControlName="customerGroupId">
           </div>
           <div class="col">
-            <label for="dateTime">Date and Time</label>
-            <input type="date" class="form-control" id="dateTime"  placeholder="Date and Time" formControlName="dateTime">
+            <label for="dateTime">Date</label>
+            <input placeholder="Date" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" id="dateTime" class="form-control" formControlName="dateTime">
+              <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
           </div>
           <div class="col">
             <label for="facilityId">facilityID</label>
@@ -39,7 +40,7 @@
   {{ taskForm.appointmentStatus | json }}
 <br>
 </div>
-<div class="table-responsive-xl" >
+<div class="table-responsive-xl">
     <table class="table">
         <thead >
             <tr>
@@ -76,4 +77,10 @@
             </tbody>
           </ng-template>
     </table>
+    <!-- <label class="example-input-wrapper">
+      Date:
+      <input placeholder="Date:"
+             [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+      <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+  </label> -->
   </div>

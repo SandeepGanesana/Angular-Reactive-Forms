@@ -8,6 +8,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LetterComponent } from './letter/letter.component';
 import { TaskComponent } from './task/task.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // import { DatepickerModule } from 'angular7-material-datepicker';
 
@@ -24,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: '', component: CustomerComponent},
       {path: 'request', component: SignupComponent, pathMatch: 'full'},
