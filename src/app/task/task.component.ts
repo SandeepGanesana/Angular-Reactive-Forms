@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Appointment } from './appointment';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TaskComponent implements OnInit {
   private url = 'http://103.211.39.48:8073/chemrsvcs/jsonapi/nosur/oas/getAllCHEMROnlineAppointmentsByVO';
   taskForm: FormGroup;
-  tableData: any = [];
+  tableData: Appointment[] = [];
   appId: string;
   status= [
     {name: 'online', id: 1},

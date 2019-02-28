@@ -11,8 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OnlineAppointmentComponent } from './task/online-appointment.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AppointmentModalComponent } from './task/appointment-modal/appointment-modal.component';
 
-// import { DatepickerModule } from 'angular7-material-datepicker';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { OnlineAppointmentComponent } from './task/online-appointment.component'
     SignupComponent,
     LetterComponent,
     TaskComponent,
-    OnlineAppointmentComponent
+    OnlineAppointmentComponent,
+    AppointmentModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,15 +33,16 @@ import { OnlineAppointmentComponent } from './task/online-appointment.component'
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
     BrowserAnimationsModule,
+    NgbModule,
     RouterModule.forRoot([
       {path: '', component: CustomerComponent},
       {path: 'request', component: SignupComponent, pathMatch: 'full'},
       {path: 'letter', component: LetterComponent , pathMatch: 'full'},
       {path: 'task', component: TaskComponent , pathMatch: 'full'},
+      {path: 'task/show/:id', component: TaskComponent , pathMatch: 'full'},
       {path: 'task/create', component: OnlineAppointmentComponent , pathMatch: 'full'},
       {path: '**', redirectTo: '', pathMatch: 'full'}
     ]),
-    // DatepickerModule
   ],
   bootstrap: [AppComponent]
 })

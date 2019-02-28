@@ -66,6 +66,7 @@
               <td> {{ data.metaStatus }} </td>
               <td> {{ data.patientName }} </td>
               <td> {{ data.phoneNumber }} </td>
+              <td> <appointment-modal [currentApp]="data"></appointment-modal> </td>
             </tr>
           </tbody>
           
@@ -83,4 +84,5 @@
              [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
       <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
   </label> -->
+
   </div>
