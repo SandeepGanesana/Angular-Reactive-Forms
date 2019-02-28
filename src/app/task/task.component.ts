@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -11,7 +12,8 @@ import { tap, catchError } from 'rxjs/operators';
 export class TaskComponent implements OnInit {
   private url = 'http://103.211.39.48:8073/chemrsvcs/jsonapi/nosur/oas/getAllCHEMROnlineAppointmentsByVO';
   taskForm: FormGroup;
-  tableData = [];
+  tableData: any = [];
+  appId: string;
   status= [
     {name: 'online', id: 1},
     {name: 'offline', id: 2},
@@ -19,7 +21,8 @@ export class TaskComponent implements OnInit {
   ]
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: ActivatedRoute
     ) { }
 
   ngOnInit() {
@@ -30,6 +33,14 @@ export class TaskComponent implements OnInit {
       dateTime: ['', Validators.required],
       facilityId: ['', Validators.required]
     })
+    this.router.paramMap.subscribe(params => {
+      this.appId = params.get("id");
+      this.appId ? this.getAppDetails(this.appId).subscribe(res => this.tableData.push(res)) : null;
+    });
+
+  }
+  getAppDetails (id:any) {
+    return this.http.get('http://103.211.39.48:8073/chemrsvcs/jsonapi/nosur/oas/findCHEMROnlineAppointmentsById/' + id);
   }
   get getAppointmentStatus() {
     return this.taskForm.get('appointmentStatus') as FormArray;
@@ -64,7 +75,8 @@ export class TaskComponent implements OnInit {
     // })
     // console.log(this.taskForm.value)
     this.searchOnline(this.taskForm.value).subscribe(res => {
-        this.tableData = (res)
+        this.tableData = (res);
+        // console.log(this.tableData)
       } 
     )
   }
@@ -79,8 +91,7 @@ export class TaskComponent implements OnInit {
     return this.http.post<any>(this.url, data, httpOptions)
       .pipe(
         tap(d => {
-          console.log('search: ' + JSON.stringify(d))
-          console.log(d.length)
+          // console.log('search: ' + JSON.stringify(d))
         }),
         catchError(this.handleError)
       );

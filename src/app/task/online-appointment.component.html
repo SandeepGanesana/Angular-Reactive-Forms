@@ -1,0 +1,93 @@
+<div class="appointment">
+  <h4> Online Appointment Form</h4>
+  <form (ngSubmit)="createAppointment()" [formGroup]="appointmentForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <p class="title">Patient Info</p>
+            <div class="form-row">
+              <div class="col">
+                  <label for="prefix">Prefix <span class="text-danger">*</span></label>
+                  <select class="form-control" id="prefix" formControlName="prefix">
+                    <option *ngFor="let p of prefix" [value]="p.propertyValue">{{ p.propertyName }}</option>
+                  </select>
+              </div>
+              <div class="col">
+                  <label for="gender">Gender <span class="text-danger">*</span></label>
+                  <select class="form-control" id="gender" formControlName="gender">
+                    <option *ngFor="let g of gender" [value]="g.propertyValue"> {{ g.propertyName }} </option>
+                  </select>
+              </div>
+
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <label for="firstname">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="firstname" formControlName="firstName">
+              </div>
+              <div class="col">
+                <label for="lastname">Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="lastname" formControlName="lastName">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                  <label for="dob">Date Of Birth <span class="text-danger">*</span></label>
+                  <input placeholder="Date" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" id="dob"
+                   class="form-control" formControlName="dob">
+                  <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+              </div>
+              <div class="col">
+                  <label for="phonenumber">Phone Number <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="phonenumber" formControlName="phoneNumber">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="title">Contact Details</p>
+              <div class="form-row">
+                <div class="col">
+                    <label for="contacttype">Contact Type <span class="text-danger">*</span></label>
+                    <select class="form-control" id="contacttype" formControlName="guardianType">
+                      <option value="1">father</option>
+                      <option value="2">Mother</option>
+                      <option value="3">Other</option>
+                    </select>
+                </div>
+                <div class="col">
+                  <label for="contactname">Contact Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="contactname" formControlName="guardianName">
+                </div>
+
+              </div>
+              <!-- <div class="form-row">
+                <div class="col">
+                    <label for="phonenumber">Phone Number <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="phonenumber" formControlName="phonenumber">
+                </div>
+                <div class="col">
+                    <label for="emailid">Email ID</label>
+                    <input type="text" class="form-control" id="emailid">
+                </div>
+              </div> -->
+              <div class="form-row">
+                <div class="col">
+                    <label for="reason">Reason <span class="text-danger">*</span></label>
+                    <textarea class="form-control" name="reason" id="reason" cols="5" rows="2" formControlName="reason"></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary float-right mt-2" [disabled]="!appointmentForm.valid">Create Appointment</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- <button type="submit" class="btn btn-primary float-right mt-2">Create Appointment</button> -->
+  </form>
+  {{ appointmentForm.value | json }} <br>
+  {{ appointmentForm.valid }}
+</div>

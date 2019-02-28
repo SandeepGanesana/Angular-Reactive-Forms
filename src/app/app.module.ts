@@ -10,6 +10,7 @@ import { TaskComponent } from './task/task.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { OnlineAppointmentComponent } from './task/online-appointment.component';
 
 // import { DatepickerModule } from 'angular7-material-datepicker';
 
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CustomerComponent,
     SignupComponent,
     LetterComponent,
-    TaskComponent
+    TaskComponent,
+    OnlineAppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
       {path: 'request', component: SignupComponent, pathMatch: 'full'},
       {path: 'letter', component: LetterComponent , pathMatch: 'full'},
       {path: 'task', component: TaskComponent , pathMatch: 'full'},
+      {path: 'task/create', component: OnlineAppointmentComponent , pathMatch: 'full'},
       {path: '**', redirectTo: '', pathMatch: 'full'}
     ]),
     // DatepickerModule
