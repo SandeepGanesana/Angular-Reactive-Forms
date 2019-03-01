@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { Appointment } from '../appointment';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,13 +13,7 @@ export class AppointmentModalComponent {
 
   constructor(private modalService: NgbModal, private http: HttpClient) {}
 
-  ngOnInit() {
-    // this.http.get('http://103.211.39.48:8073/chemrsvcs/jsonapi/nosur/oas/findCHEMROnlineAppointmentsById/184')
-    // .subscribe(res=> {
-    //   this.currentApp = res;
-    //   console.log(this.currentApp)
-    // })
-  }
+  ngOnInit() { }
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
