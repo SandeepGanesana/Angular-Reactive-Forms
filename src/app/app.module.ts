@@ -13,6 +13,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OnlineAppointmentComponent } from './task/online-appointment.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentModalComponent } from './task/appointment-modal/appointment-modal.component';
+import { TemplateFormComponent } from './template-form/template-form.component';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AppointmentModalComponent } from './task/appointment-modal/appointment-
     LetterComponent,
     TaskComponent,
     OnlineAppointmentComponent,
-    AppointmentModalComponent
+    AppointmentModalComponent,
+    TemplateFormComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { AppointmentModalComponent } from './task/appointment-modal/appointment-
       {path: 'task', component: TaskComponent , pathMatch: 'full'},
       {path: 'task/show/:id', component: TaskComponent , pathMatch: 'full'},
       {path: 'task/create', component: OnlineAppointmentComponent , pathMatch: 'full'},
+      { path: 'template-form', component: TemplateFormComponent, pathMatch: 'full' },
       {path: '**', redirectTo: '', pathMatch: 'full'}
     ]),
   ],

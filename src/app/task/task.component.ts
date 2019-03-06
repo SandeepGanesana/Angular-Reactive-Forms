@@ -33,7 +33,7 @@ export class TaskComponent implements OnInit {
     })
     this.router.paramMap.subscribe(params => {
       this.appId = params.get("id");
-      this.appId ? this.taskService.showAppoitmentDetails(this.appId).subscribe(res => {this.tableData.push(res)}) : null;
+      // this.appId ? this.taskService.showAppoitmentDetails(this.appId).subscribe(res => {this.tableData.push(res)}) : null;
     });
 
   }
